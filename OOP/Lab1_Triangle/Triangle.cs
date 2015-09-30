@@ -85,6 +85,7 @@ namespace Lab1_Triangle
 
             return 0.5 *sidesSorted[0] * sidesSorted[1] * Math.Sin(maxAngle * Math.PI / 180 );
         }
+
         public double GetPerimeter()
         {
             return side1+side2+side3;
