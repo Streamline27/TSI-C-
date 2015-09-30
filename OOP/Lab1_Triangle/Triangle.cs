@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Lab1_Triangle
 {
+    //                   ravnostorinniy ravnobedrenniy
+    enum TriangleType { equilaterial, isosceles, right, regular}
+
     class Triangle
     {
         /* Fields */
@@ -84,6 +87,14 @@ namespace Lab1_Triangle
             Array.Sort(sidesSorted);
 
             return 0.5 *sidesSorted[0] * sidesSorted[1] * Math.Sin(maxAngle * Math.PI / 180 );
+        }
+
+        public TriangleType GetType()
+        {
+            if (Side1 == Side2 && Side2 == Side3) return TriangleType.equilaterial;
+            if (Angle1 == Angle2 && Angle3 == Angle2) return TriangleType.isosceles;
+            if (Angle1 == 90 || Angle2 == 90 || Angle3 == 90) return TriangleType.right;
+            return TriangleType.regular;
         }
 
         public double GetPerimeter()
