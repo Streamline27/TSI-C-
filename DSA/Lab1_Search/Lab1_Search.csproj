@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Prog.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -49,7 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Algorithms\Algorithms.csproj">
-      <Project>{c45ec4c6-c687-413f-8758-0e3539ef2aa1}</Project>
+      <Project>{aacc28a6-f300-4410-86c3-8a7d563b0e6a}</Project>
       <Name>Algorithms</Name>
     </ProjectReference>
   </ItemGroup>

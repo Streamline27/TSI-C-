@@ -5,7 +5,7 @@ VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab1_Search", "Lab1_Search\Lab1_Search.csproj", "{C46447FF-4193-4C2D-8A0E-EAA1445D5765}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Algorithms", "Algorithms\Algorithms.csproj", "{C45EC4C6-C687-413F-8758-0E3539EF2AA1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Algorithms", "Algorithms\Algorithms.csproj", "{AACC28A6-F300-4410-86C3-8A7D563B0E6A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{C46447FF-4193-4C2D-8A0E-EAA1445D5765}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C46447FF-4193-4C2D-8A0E-EAA1445D5765}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C46447FF-4193-4C2D-8A0E-EAA1445D5765}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C45EC4C6-C687-413F-8758-0E3539EF2AA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C45EC4C6-C687-413F-8758-0E3539EF2AA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C45EC4C6-C687-413F-8758-0E3539EF2AA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C45EC4C6-C687-413F-8758-0E3539EF2AA1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AACC28A6-F300-4410-86C3-8A7D563B0E6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AACC28A6-F300-4410-86C3-8A7D563B0E6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AACC28A6-F300-4410-86C3-8A7D563B0E6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AACC28A6-F300-4410-86C3-8A7D563B0E6A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

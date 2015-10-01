@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lab1_Search.Algorithms
+namespace Algorithms
 {
-    class AlgorithmSort
+    public class AlgorithmSort
     {
         public static void RandomShuffle(int[] a)
         {

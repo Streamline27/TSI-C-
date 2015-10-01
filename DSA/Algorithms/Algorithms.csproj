@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C45EC4C6-C687-413F-8758-0E3539EF2AA1}</ProjectGuid>
+    <ProjectGuid>{AACC28A6-F300-4410-86C3-8A7D563B0E6A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Algorithms</RootNamespace>
@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AlgorithmGeneral.cs" />
     <Compile Include="AlgorithmSearch.cs" />
     <Compile Include="AlgorithmSort.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
