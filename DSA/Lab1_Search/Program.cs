@@ -12,8 +12,11 @@ namespace Lab1_Search
         static void Main(string[] args)
         {
             // Hello
-            int[] numbers = new int[5] { 1, 2, 3, 4, 5 };
+            int[] numbers = AlgorithmGeneral.GetRandomArray(8);
+            AlgorithmGeneral.ShowArray(numbers);
+
             Console.WriteLine(AlgorithmSearch.SearchIncremental(numbers, 2));
+
             Console.WriteLine(AlgorithmSearch.SearchBarrier(numbers, 2));
             Console.WriteLine(AlgorithmSearch.SearchBarrier(numbers, 2));
 

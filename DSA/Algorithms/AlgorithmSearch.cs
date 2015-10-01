@@ -13,20 +13,25 @@ namespace Algorithms
             int n = a.Length;
             int i = 0;
             while ((a[i] != key) && (i < n)) i++;
-            if (i == key) return i;
-            else return -1;
+            if (i == n) return -1;
+            else return i;
         }
 
         public static int SearchBarrier(int[] a, int key)
         {
             // Adding barrier
             int lastIndex = a.Length - 1;
-            if (a[lastIndex] != key) a[lastIndex] = key;
-            else return a.Length - 1;
+            if (a[lastIndex] == key) return lastIndex;
+            int tmp = a[lastIndex];
+            a[lastIndex] = key;
 
             // Searching for key
             int i = 0;
             while (a[i] != key) i++;
+
+            // Removing barier
+            a[lastIndex] = tmp;
+            // Returning the result
             if (i == lastIndex) return -1;
             else return i;
         }
