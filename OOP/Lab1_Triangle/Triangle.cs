@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lab1_Triangle
 {
-    //                   ravnostorinniy ravnobedrenniy
+    //                  ravnostorinniy ravnobedrenniy
     enum TriangleType { equilaterial, isosceles, right, regular}
 
     class Triangle
@@ -47,6 +47,45 @@ namespace Lab1_Triangle
             private set { angle3 = value; }
         }
 
+        public double Area
+        {
+            get {
+                    double maxAngle = Math.Max(Angle3, Math.Max(Angle2, Angle1));
+                    double[] sidesSorted = new double[] { Side1, Side2, Side3 };
+                    Array.Sort(sidesSorted);
+
+                    return 0.5 * sidesSorted[0] * sidesSorted[1] * Math.Sin(maxAngle * Math.PI / 180);
+                }
+        }
+        public double Perimeter
+        {
+            get { return Side1 + Side2 + Side3; }
+        }
+
+        public TriangleType Type
+        {
+            get
+            {
+                if (Side1 == Side2 && Side2 == Side3) return TriangleType.equilaterial;
+                if (Angle1 == Angle2 && Angle3 == Angle2) return TriangleType.isosceles;
+                if (Angle1 == 90 || Angle2 == 90 || Angle3 == 90) return TriangleType.right;
+                return TriangleType.regular;
+            }
+        }
+
+        public double Height1
+        {
+            get { return 2 * Area / Side1; }
+        }
+        public double Height2
+        {
+            get { return 2 * Area / Side2; }
+        }
+        public double Height3
+        {
+            get { return 2 * Area / Side3; }
+        }
+        
         /* Constructor */
         public Triangle(double side1, double side2, double side3, double angle1, double angle2, double angle3)
         {
@@ -62,9 +101,12 @@ namespace Lab1_Triangle
             Angle1 = angle1;
             Angle2 = angle2;
             Angle3 = angle3;
+
         }
-     
-        /* Public interface methods */
+
+        /* ******************************************************************  */
+        /* ****************          Public methods         *****************  */
+
         public void ChangeAngles(double angle1, double angle2, double angle3){
             CheckAngles(angle1, angle2, angle3);
             Angle1 = angle1;
@@ -80,44 +122,17 @@ namespace Lab1_Triangle
             Side3 = side3;
         }
 
-        public double GetArea()
+      
+        public override string ToString()
         {
-            double maxAngle = Math.Max(Angle3, Math.Max(Angle2, Angle1));
-            double[] sidesSorted = new double[]{Side1, Side2, Side3};
-            Array.Sort(sidesSorted);
-
-            return 0.5 *sidesSorted[0] * sidesSorted[1] * Math.Sin(maxAngle * Math.PI / 180 );
+            String angles = Angle1 + " , " + Angle2 + " , " + Angle3;
+            String sides = Side1 + " , " + Side2 + " , " + Side3;
+            return "Angles: " + angles + " Sides: " + sides;
         }
 
-        public TriangleType GetType()
-        {
-            if (Side1 == Side2 && Side2 == Side3) return TriangleType.equilaterial;
-            if (Angle1 == Angle2 && Angle3 == Angle2) return TriangleType.isosceles;
-            if (Angle1 == 90 || Angle2 == 90 || Angle3 == 90) return TriangleType.right;
-            return TriangleType.regular;
-        }
-
-        public double GetPerimeter()
-        {
-            return side1+side2+side3;
-        }
-
-        public double GetHeight1()
-        {
-            return 2 * GetArea() / side1;
-        }
-        public double GetHeight2()
-        {
-            return 2 * GetArea() / side2;
-        }
-        public double GetHeight3()
-        {
-            return 2 * GetArea() / side3;
-        }
-
-
-        /* ********************** */
-        /* Private helper methods */
+       
+        /* ******************************************************************  */
+        /* ****************     Private helper methods      *****************  */
 
         //===== ==== Exception hangling 
         private void CheckAngles(double angle1, double angle2, double angle3)
@@ -131,6 +146,7 @@ namespace Lab1_Triangle
             if (sides[0] + sides[1] < sides[2]) throw new System.ArgumentException("Sum of 2 sides is less than length of third");
 
         }
+        
 
     }
 }
