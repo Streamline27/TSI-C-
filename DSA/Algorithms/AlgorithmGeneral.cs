@@ -9,7 +9,6 @@ namespace Algorithms
 {
     public class AlgorithmGeneral
     {
-        delegate void TimedAction();
 
         public static void ShowArray(int[] a)
         {
@@ -26,7 +25,8 @@ namespace Algorithms
         }
 
 
-        public long GetRunningTime(TimedAction action)
+        public delegate void TimedAction();
+        public static long GetRunningTime(Action action)
         {
             Stopwatch stopwatch = new Stopwatch();
 

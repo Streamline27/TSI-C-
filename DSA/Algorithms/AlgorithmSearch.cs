@@ -35,5 +35,18 @@ namespace Algorithms
             if (i == lastIndex) return -1;
             else return i;
         }
+
+        public static int SearchBinaryRecursive(int[] a, int key){
+            return SearchBinaryRecursive(a, key, 0, a.Length-1);
+        }
+
+        private static int SearchBinaryRecursive(int[] a, int key, int lo, int hi)
+        {
+            if (hi == lo && a[hi] != key) return -1;
+            int current = (hi + lo) / 2;
+            if (a[current] > key)  return SearchBinaryRecursive(a, key, lo, current - 1);
+            if (a[current] < key) return SearchBinaryRecursive(a, key, current + 1, hi);
+            else return current;
+        }
     }
 }

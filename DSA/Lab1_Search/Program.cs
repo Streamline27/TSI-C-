@@ -14,11 +14,20 @@ namespace Lab1_Search
             // Hello
             int[] numbers = AlgorithmGeneral.GetRandomArray(8);
             AlgorithmGeneral.ShowArray(numbers);
+            AlgorithmSort.InsertionSort(numbers);
+            AlgorithmGeneral.ShowArray(numbers);
 
-            Console.WriteLine(AlgorithmSearch.SearchIncremental(numbers, 2));
-
-            Console.WriteLine(AlgorithmSearch.SearchBarrier(numbers, 2));
-            Console.WriteLine(AlgorithmSearch.SearchBarrier(numbers, 2));
+            int pos = AlgorithmSearch.SearchBinaryRecursive(numbers, 10);
+            Console.WriteLine(pos);
+            /*
+            long time = AlgorithmGeneral.GetRunningTime(delegate()
+            {
+                Console.WriteLine(AlgorithmSearch.SearchIncremental(numbers, 2));
+            });
+            Console.WriteLine("Time in milliseconds" + time);
+            */
+            //Console.WriteLine(AlgorithmSearch.SearchBarrier(numbers, 2));
+            //Console.WriteLine(AlgorithmSearch.SearchBarrier(numbers, 2));
 
             Console.ReadLine();
         }
