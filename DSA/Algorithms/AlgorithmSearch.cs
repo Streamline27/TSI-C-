@@ -25,20 +25,13 @@ namespace Algorithms
             int lastIndex = a.Length - 1;
             if (a[lastIndex] == key)
             {
-                /* Writting results to logs */
-                using (System.IO.StreamWriter file =
-                new System.IO.StreamWriter(path, true))
-                {
-                    Console.WriteLine("Incremental Search. Elements: " + a.Length + ". Number of compares: " + 1 + " (Key: " + key + ")");
-                    file.WriteLine("Incremental Search. Elements: " + a.Length + ". Number of compares: " + 1 + " (Key: " + key + ")");
-                }
-                /* Done */
+                String msg = "Incremental Search. Elements: " + a.Length + ". Number of compares: " + 1 + " (Key: " + key + ")"; 
+                WriteToFile(msg);
                 return lastIndex;
             }
             int tmp = a[lastIndex];
             a[lastIndex] = key;
 
-            // Couner
             int counter = 1;
 
             // Searching for key
@@ -51,14 +44,7 @@ namespace Algorithms
             counter++;
 
             /* Writting results to logs */
-            using (System.IO.StreamWriter file =
-            new System.IO.StreamWriter(path, true))
-            {
-                Console.WriteLine("Incremental Search. Elements: " + a.Length + ". Number of compares: " + counter+" (Key: "+key+")");
-                file.WriteLine("Incremental Search. Elements: " + a.Length + ". Number of compares: " + counter+" (Key: "+key+")");
-            }
-            /* Done */
-
+            WriteToFile("Incremental Search. Elements: " + a.Length + ". Number of compares: " + counter + " (Key: " + key + ")");
 
             // Removing barier
             a[lastIndex] = tmp;
@@ -105,19 +91,22 @@ namespace Algorithms
                 }
             }
             
-
             counter++; // Schetchik
+            
             /* Writting results to logs */
-            using (System.IO.StreamWriter file =
-            new System.IO.StreamWriter(path, true))
-            {
-                Console.WriteLine("Binary      Search. Elements: " + a.Length + ". Number of compares: " + counter + " (Key: " + key + ")");
-                file.WriteLine("Binary      Search. Elements: " + a.Length + ". Number of compares: " + counter + " (Key: " + key + ")");
-            }
-            /* Done */
+            WriteToFile("Binary      Search. Elements: " + a.Length + ". Number of compares: " + counter + " (Key: " + key + ")");
 
             if (a[current] == key) return current;
             return -1;
         }
+        private static void WriteToFile(String message)
+        {
+            Console.WriteLine(message);
+            System.IO.StreamWriter file = new System.IO.StreamWriter(path, true);
+            file.WriteLine(message);
+        }
     }
+
+
+
 }
