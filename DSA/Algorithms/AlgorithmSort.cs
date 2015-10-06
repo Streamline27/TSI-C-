@@ -25,7 +25,7 @@ namespace Algorithms
             for (int i = 1; i < a.Length; i++)
             {
                 int k = i;
-                while (k > 0 && a[k] > a[k - 1])
+                while (k > 0 && a[k] < a[k - 1])
                 {
                     int tmp = a[k-1];
                     a[k - 1] = a[k];

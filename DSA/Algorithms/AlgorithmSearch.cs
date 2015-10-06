@@ -8,6 +8,8 @@ namespace Algorithms
 {
     public class AlgorithmSearch
     {
+        private static String path = @"C:\Users\Vladislav\Desktop\SearchingLog.txt";
+
         public static int SearchIncremental(int[] a, int key)
         {
             int n = a.Length;
@@ -21,13 +23,42 @@ namespace Algorithms
         {
             // Adding barrier
             int lastIndex = a.Length - 1;
-            if (a[lastIndex] == key) return lastIndex;
+            if (a[lastIndex] == key)
+            {
+                /* Writting results to logs */
+                using (System.IO.StreamWriter file =
+                new System.IO.StreamWriter(path, true))
+                {
+                    Console.WriteLine("Incremental Search. Elements: " + a.Length + ". Number of compares: " + 1 + " (Key: " + key + ")");
+                    file.WriteLine("Incremental Search. Elements: " + a.Length + ". Number of compares: " + 1 + " (Key: " + key + ")");
+                }
+                /* Done */
+                return lastIndex;
+            }
             int tmp = a[lastIndex];
             a[lastIndex] = key;
 
+            // Couner
+            int counter = 1;
+
             // Searching for key
             int i = 0;
-            while (a[i] != key) i++;
+            while (a[i] != key)
+            {
+                counter++;
+                i++;
+            }
+            counter++;
+
+            /* Writting results to logs */
+            using (System.IO.StreamWriter file =
+            new System.IO.StreamWriter(path, true))
+            {
+                Console.WriteLine("Incremental Search. Elements: " + a.Length + ". Number of compares: " + counter+" (Key: "+key+")");
+                file.WriteLine("Incremental Search. Elements: " + a.Length + ". Number of compares: " + counter+" (Key: "+key+")");
+            }
+            /* Done */
+
 
             // Removing barier
             a[lastIndex] = tmp;
@@ -45,8 +76,48 @@ namespace Algorithms
             if (hi == lo && a[hi] != key) return -1;
             int current = (hi + lo) / 2;
             if (a[current] > key)  return SearchBinaryRecursive(a, key, lo, current - 1);
-            if (a[current] < key) return SearchBinaryRecursive(a, key, current + 1, hi);
-            else return current;
+            if (a[current] < key)  return SearchBinaryRecursive(a, key, current + 1, hi);
+            if (a[current] == key) return current;
+            return -1;
+        }
+
+        public static int SearchBinary(int[] a, int key)
+        {
+            int counter = 0; //Schetchik
+
+            int lo = 0;
+            int hi = a.Length-1;
+            int current = 0;
+            while (a[current] != key && hi >= lo)
+            {
+                counter += 2; // Schetchik
+
+                current = (hi + lo) / 2;
+                if (a[current] > key)
+                {
+                    hi = current - 1;
+                    counter++; // Schetchik
+                }
+                if (a[current] < key)
+                {
+                    lo = current + 1;
+                    counter++; // Schetchik
+                }
+            }
+            
+
+            counter++; // Schetchik
+            /* Writting results to logs */
+            using (System.IO.StreamWriter file =
+            new System.IO.StreamWriter(path, true))
+            {
+                Console.WriteLine("Binary      Search. Elements: " + a.Length + ". Number of compares: " + counter + " (Key: " + key + ")");
+                file.WriteLine("Binary      Search. Elements: " + a.Length + ". Number of compares: " + counter + " (Key: " + key + ")");
+            }
+            /* Done */
+
+            if (a[current] == key) return current;
+            return -1;
         }
     }
 }
