@@ -130,6 +130,16 @@ namespace Lab1_Triangle
             return "Angles: " + angles + " Sides: " + sides;
         }
 
+        public void ShowInfo()
+        {
+            Console.WriteLine(ToString());
+            Console.WriteLine("Height 1: " + Height1);
+            Console.WriteLine("Height 2: " + Height2);
+            Console.WriteLine("Height 3: " + Height3);
+            Console.WriteLine("Area: " + Area);
+            Console.WriteLine("Perimeter: " + Perimeter);
+        }
+
        
         /* ******************************************************************  */
         /* ****************     Private helper methods      *****************  */

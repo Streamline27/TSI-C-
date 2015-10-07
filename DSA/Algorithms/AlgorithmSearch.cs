@@ -25,8 +25,9 @@ namespace Algorithms
             int lastIndex = a.Length - 1;
             if (a[lastIndex] == key)
             {
-                String msg = "Incremental Search. Elements: " + a.Length + ". Number of compares: " + 1 + " (Key: " + key + ")"; 
-                WriteToFile(msg);
+                String msg = "Incremental Search. Elements: " + a.Length + ". Number of compares: " + 1 + " (Key: " + key + ")";
+                Console.WriteLine(msg);
+                //WriteToFile(msg);
                 return lastIndex;
             }
             int tmp = a[lastIndex];
@@ -44,7 +45,8 @@ namespace Algorithms
             counter++;
 
             /* Writting results to logs */
-            WriteToFile("Incremental Search. Elements: " + a.Length + ". Number of compares: " + counter + " (Key: " + key + ")");
+            //WriteToFile("Incremental Search. Elements: " + a.Length + ". Number of compares: " + counter + " (Key: " + key + ")");
+            Console.WriteLine("Incremental Search. Elements: " + a.Length + ". Number of compares: " + counter + " (Key: " + key + ")");
 
             // Removing barier
             a[lastIndex] = tmp;
@@ -92,13 +94,13 @@ namespace Algorithms
             }
             
             counter++; // Schetchik
-            
             /* Writting results to logs */
-            WriteToFile("Binary      Search. Elements: " + a.Length + ". Number of compares: " + counter + " (Key: " + key + ")");
-
+            //WriteToFile("Binary      Search. Elements: " + a.Length + ". Number of compares: " + counter + " (Key: " + key + ")");
+            Console.WriteLine("Binary      Search. Elements: " + a.Length + ". Number of compares: " + counter + " (Key: " + key + ")");
             if (a[current] == key) return current;
             return -1;
         }
+
         private static void WriteToFile(String message)
         {
             Console.WriteLine(message);
