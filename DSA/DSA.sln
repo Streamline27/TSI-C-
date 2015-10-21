@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab1_Search", "Lab1_Search\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Algorithms", "Algorithms\Algorithms.csproj", "{AACC28A6-F300-4410-86C3-8A7D563B0E6A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab2_Sort", "Lab2_Sort\Lab2_Sort.csproj", "{1736EFCC-739B-4477-BDA6-2A33BD37DEBB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{AACC28A6-F300-4410-86C3-8A7D563B0E6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AACC28A6-F300-4410-86C3-8A7D563B0E6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AACC28A6-F300-4410-86C3-8A7D563B0E6A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1736EFCC-739B-4477-BDA6-2A33BD37DEBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1736EFCC-739B-4477-BDA6-2A33BD37DEBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1736EFCC-739B-4477-BDA6-2A33BD37DEBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1736EFCC-739B-4477-BDA6-2A33BD37DEBB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
