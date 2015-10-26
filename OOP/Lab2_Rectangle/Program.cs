@@ -11,8 +11,14 @@ namespace Lab2_Rectangle
 
         static void Main(string[] args)
         {
-            Rectangle rect = new Rectangle(15, 15);
 
+            Console.WriteLine("Demo pair.");
+            Pair pair = new Pair(3, 3);
+            pair.WriteAB();
+            Console.WriteLine();
+
+            Console.WriteLine("Demo Rectangle.");
+            Rectangle rect = new Rectangle(15, 15);
             rect.ShowInfo();
 
             Console.ReadLine();

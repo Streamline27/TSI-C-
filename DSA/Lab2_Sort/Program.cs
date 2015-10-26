@@ -6,76 +6,121 @@ using System.Threading.Tasks;
 
 namespace Lab2_Sort
 {
-
-
-
     class Program
     {
-
-        public static void InsertionSort(int[] a)
+        public static int InsertionSort(int[] a)
         {
+            int schetchik = 0;
             for (int i = 1; i < a.Length; i++)
             {
                 int k = i;
                 while (k > 0 && a[k] < a[k - 1])
                 {
-                    int tmp = a[k-1];
+                    int tmp = a[k - 1];
                     a[k - 1] = a[k];
                     a[k] = tmp;
                     k--;
+                    schetchik += 2;
+                }
+                schetchik++;
+            }
+            return schetchik;
+        }
+
+
+        private static int getBinDigit(int number, int rank)
+        {
+            return (number & (1 << rank)) >> rank;
+        }
+
+        public static int RadixSort(int[] a){
+            int[] b = new int[a.Length];
+            int numIterations = Convert.ToString(a.Max(), 2).Length;
+
+            int schetchik = 0;
+
+            for (int digit = 0; digit < numIterations; digit++)
+			{
+                int indexB = 0;
+                for (int m = 0; m < 2; m++)
+                {
+                    for (int i = 0; i < a.Length; i++)
+                    {
+                        if (getBinDigit(a[i], digit)==m)
+                        {
+                            b[indexB] = a[i];
+                            indexB += 1;
+                        }
+                        schetchik++;
+                    }
+                    schetchik++;
+                }
+                schetchik++;
+                for (int i = 0; i < a.Length; i++)
+                {
+                    schetchik++;
+                    a[i] = b[i];
+                }
+			}
+            return schetchik;
+        }
+
+        
+        static void Main(string[] args)
+        {
+            /*Console.Write("Enter number of elements (0 for deffault): ");
+            int n = Convert.ToInt32(Console.ReadLine());
+
+            int[] a;
+            if (n == 0) a = Algorithms.AlgorithmGeneral.GetRandomArray(6, 0);
+            else 
+            {
+                // Reading data to array
+                a = new int[n];
+                for (int i = 0; i < n; i++)
+                {
+                    Console.Write((i + 1) + ". ");
+                    a[i] = Convert.ToInt32(Console.ReadLine());
                 }
             }
+
+            radixSort(a);
+            
+            Show(a);
+            */
+            
+            Console.Write("Enter number of elements (0 for deffault): ");
+            int n = Convert.ToInt32(Console.ReadLine());
+
+            for (int i = 0; i < 10; i++)
+            {
+                int[] a = Algorithms.AlgorithmGeneral.GetRandomArray(n);
+                Console.WriteLine(InsertionSort(a));
+            }
+
+
+            Console.ReadLine();
+            Main(null);
         }
 
-        private static int getDigit(int number, int rank){
-            int a = 1;
-            for (int i = 1; i < rank; i++) a*=10;
-            return (number /  a) % 10;
-        }
+        /* ******************************************************************* */
+        /* ******************   Misc. functionality    *********************** */
 
-
-        static private bool Odinakovie(int[] a)
+        static private void ShowBinary(int[] a)
         {
-            //for (int i = 1; i < a.Length; i++) if (a[i - 1] != a[i]) return false;
-            for (int i = 0; i < a.Length; i++) if (a[i] != 6) return false;
-            return true;
-        }
-
-        static private void Show(int[] a)
-        {
-            for (int i = 0; i < a.Length; i++) Console.Write(a[i]);
+            for (int i = 0; i < a.Length; i++) Console.WriteLine(Convert.ToString(a[i], 2));
             Console.WriteLine();
         }
 
-        static void Main(string[] args)
+
+        static private void Show(int[] a)
         {
-            Random rand = new Random();
-            
-   
-            int[] randoms = new int[10];
-
-            int together = 0;
-
-            for (int j = 0; j < 1; j++)
+            for (int i = 0; i < a.Length; i++)
             {
-
-                int count = 0 ;
-
-                do
-                {
-                    for (int i = 0; i < randoms.Length; i++) randoms[i] = rand.Next(1, 7);
-     //               Show(randoms);
-                    count++;
-                } while (!Odinakovie(randoms));
-                together += count;
-
+                Console.Write(a[i] + " ");
             }
-
-
-            Console.WriteLine("Counter YOLO: " + together/1000);
-            Console.ReadLine();
+            Console.WriteLine();
         }
-
 
     }
 }

@@ -8,9 +8,9 @@ namespace Algorithms
 {
     public class AlgorithmSort
     {
+        private static Random random = new Random();
         public static void RandomShuffle(int[] a)
         {
-            Random random = new Random();
             for (int i = 1; i < a.Length; i++)
             {
                 int pos = random.Next(i + 1);
