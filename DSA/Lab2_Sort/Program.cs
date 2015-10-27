@@ -68,9 +68,11 @@ namespace Lab2_Sort
         
         static void Main(string[] args)
         {
-            /*Console.Write("Enter number of elements (0 for deffault): ");
+            
+            Console.Write("Enter number of elements (0 for deffault): ");
             int n = Convert.ToInt32(Console.ReadLine());
 
+            // Creating random array
             int[] a;
             if (n == 0) a = Algorithms.AlgorithmGeneral.GetRandomArray(6, 0);
             else 
@@ -84,23 +86,19 @@ namespace Lab2_Sort
                 }
             }
 
-            radixSort(a);
-            
+            // Creating array coppy for Insertion sort
+            int[] b = new int[a.Length];
+            Array.Copy(a, b, a.Length);
+
+            Console.WriteLine("Insertion sort: ");
+            InsertionSort(b);
+            Show(b);
+
+            Console.WriteLine("Radix sort: ");
+            RadixSort(a);
             Show(a);
-            */
             
-            Console.Write("Enter number of elements (0 for deffault): ");
-            int n = Convert.ToInt32(Console.ReadLine());
-
-            for (int i = 0; i < 10; i++)
-            {
-                int[] a = Algorithms.AlgorithmGeneral.GetRandomArray(n);
-                Console.WriteLine(InsertionSort(a));
-            }
-
-
             Console.ReadLine();
-            Main(null);
         }
 
         /* ******************************************************************* */
