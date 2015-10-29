@@ -74,7 +74,7 @@ namespace Lab2_Sort
 
             // Creating random array
             int[] a;
-            if (n == 0) a = Algorithms.AlgorithmGeneral.GetRandomArray(6, 0);
+            if (n == 0) a = GetRandomArray(6, 0);
             else 
             {
                 // Reading data to array
@@ -120,5 +120,19 @@ namespace Lab2_Sort
             Console.WriteLine();
         }
 
+        public static int[] GetRandomArray(int n, int startWith = 0)
+        {
+            Random random = new Random();
+            int[] a = new int[n];
+            for (int i = startWith; i < n; i++) a[i] = i;
+            for (int i = 1; i < a.Length; i++)
+            {
+                int pos = random.Next(i + 1);
+                int tmp = a[pos];
+                a[pos] = a[i];
+                a[i] = tmp;
+            }
+            return a;
+        }
     }
 }

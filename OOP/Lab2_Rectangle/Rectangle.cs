@@ -10,7 +10,7 @@ namespace Lab2_Rectangle
     {
         public Rectangle(int a, int b) : base(a, b) { }
 
-        public int Perimeter
+        public virtual int Perimeter
         {
             get
             {
@@ -18,7 +18,7 @@ namespace Lab2_Rectangle
             }
         }
 
-        public void ShowInfo()
+        public virtual void ShowInfo()
         {
             Console.WriteLine("Demo.");
             Console.Write("Rectangle: ");

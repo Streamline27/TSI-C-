@@ -17,7 +17,7 @@ namespace Lab2_Rectangle
             this.B = b;
         }
 
-        public int Sum
+        public virtual int Sum
         {
             get
             {
@@ -25,7 +25,7 @@ namespace Lab2_Rectangle
             }
         }
 
-        public void WriteAB()
+        public virtual void WriteAB()
         {
             Console.WriteLine("A: " + A + " B: " + B);
         }
