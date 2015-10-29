@@ -18,8 +18,8 @@ namespace Lab3_Poly
     // Class for math problems with two arguments
     public abstract class MathProblem : Question
     {
-        protected int A { get; set; }
-        protected int B { get; set; }
+        protected double A { get; set; }
+        protected double B { get; set; }
 
         protected const String FB_POSITIVE = "Answer is right!";
         protected const String FB_NEGATIVE = "Answer is wrong!";
@@ -28,16 +28,16 @@ namespace Lab3_Poly
 
         /* abstract methods for getting problem features */
         protected abstract String GetOperation();
-        protected abstract int ComputeResult(int a, int b);
+        protected abstract double ComputeResult(double a, double b);
 
         /*  abstract methods for communication with outer world */
         protected abstract void ShowQuestion(String question);
         protected abstract void ShowFeedback(String feedback);
-        protected abstract int GetUserAnswer();
+        protected abstract double GetUserAnswer();
 
 
         // Constructor
-        public MathProblem(int a, int b)
+        public MathProblem(double a, double b)
         {
             A = a;
             B = b;
@@ -53,8 +53,8 @@ namespace Lab3_Poly
 
         public virtual void RequestAnswer()
         {
-            int AnticipatedAnswer = GetUserAnswer(); // Requests abstract implementation
-            int ActualAnswer = ComputeResult(A, B);  // Requests abstract implementation
+            double AnticipatedAnswer = GetUserAnswer(); // Requests abstract implementation
+            double ActualAnswer = ComputeResult(A, B);  // Requests abstract implementation
 
             // Computes if user answer is actually right
             if (AnticipatedAnswer == ActualAnswer) IsAnswered = true;
@@ -86,6 +86,7 @@ namespace Lab3_Poly
 
     public abstract class ConsoleMathProblem : MathProblem
     {
+
         protected override void ShowQuestion(string question)
         {
             Console.WriteLine(question);
@@ -96,13 +97,13 @@ namespace Lab3_Poly
             Console.WriteLine(feedback);
         }
 
-        protected override int GetUserAnswer()
+        protected override Double GetUserAnswer()
         {
             Console.Write("Enter answer: ");
-            return Convert.ToInt32(Console.ReadLine());
+            return Convert.ToDouble(Console.ReadLine());
         }
 
-        public ConsoleMathProblem(int a, int b) : base(a, b) { }
+        public ConsoleMathProblem(double a, double b) : base(a, b) { }
     }
 
     /* **************************************** */
@@ -117,12 +118,12 @@ namespace Lab3_Poly
             return " + ";
         }
 
-        protected override int ComputeResult(int a, int b)
+        protected override double ComputeResult(double a, double b)
         {
             return a + b;
         }
 
-        public Summation(int a, int b) : base(a, b) { }
+        public Summation(double a, double b) : base(a, b) { }
     }
 
 
@@ -134,7 +135,7 @@ namespace Lab3_Poly
             return " - ";
         }
 
-        protected override int ComputeResult(int a, int b)
+        protected override double ComputeResult(double a, double b)
         {
             return a - b;
         }
