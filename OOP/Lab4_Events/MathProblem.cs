@@ -4,9 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lab3_Poly
+namespace Lab4_Events
 {
-    // Interface for any sort of question
     public interface Question
     {
         Boolean IsAnswered { get; set; }
@@ -15,14 +14,13 @@ namespace Lab3_Poly
         void GetFeedback();
     }
 
-    // Class for math problems with two arguments
     public abstract class MathProblem : Question
     {
         protected double A { get; set; }
         protected double B { get; set; }
 
-        // member for communication with outer world
-        private ProblemWritter problemWritter;
+
+        private ProblemWritter problemWritter; // member for communication with outer world
 
         protected const String FB_POSITIVE = "Answer is right!";
         protected const String FB_NEGATIVE = "Answer is wrong!";
@@ -33,7 +31,6 @@ namespace Lab3_Poly
         protected abstract String GetOperation();
         protected abstract double ComputeResult(double a, double b);
 
-        // Constructor
         public MathProblem(double a, double b, ProblemWritter problemWritter)
         {
             A = a;
@@ -41,8 +38,6 @@ namespace Lab3_Poly
             this.problemWritter = problemWritter;
         }
 
-        /*   Question interface methods
-        *******************************/
         public virtual void Ask()
         {
             String question = GetQuestionText();
@@ -54,7 +49,6 @@ namespace Lab3_Poly
             double AnticipatedAnswer = problemWritter.RecievetUserAnswer(); // Requests abstract implementation
             double ActualAnswer = ComputeResult(A, B);  // Requests abstract implementation
 
-            // Computes if user answer is actually right
             if (AnticipatedAnswer == ActualAnswer) IsAnswered = true;
             else IsAnswered = false;
         }
@@ -68,7 +62,6 @@ namespace Lab3_Poly
 
             problemWritter.ShowFeedback(feedback); // Requests abstract implementation
         }
-        /* ***********    Done    *********** */
 
         // Method for forming question text string
         protected virtual String GetQuestionText()
@@ -77,43 +70,10 @@ namespace Lab3_Poly
             return A + operation + B + " =?";
         }
     }
+   
 
-    /* ********************************************************************* */
-    // Abstract class that provides functionality for outer world communication
-    public abstract class ProblemWritter{
-        /*  abstract methods for communication with outer world */
-        public abstract void ShowQuestion(String question);
-        public abstract void ShowFeedback(String feedback);
-        public abstract double RecievetUserAnswer();
-    }
-
-
-    /* Derived class for communication with console */
-    public class ConsoleProblemWritter : ProblemWritter
-    {
-        protected override void ShowQuestion(string question)
-        {
-            Console.WriteLine(question);
-        }
-
-        protected override void ShowFeedback(string feedback)
-        {
-            Console.WriteLine(feedback);
-        }
-
-        protected override Double GetUserAnswer()
-        {
-            Console.Write("Enter answer: ");
-            return Convert.ToDouble(Console.ReadLine());
-        }
-
-        public ConsoleProblemWritter();
-    }
-
-    
     /* **************************************** */
     /* ******  Classes for statements  ******** */
-
 
     // First statements (+)
     public class Summation : MathProblem
@@ -148,7 +108,7 @@ namespace Lab3_Poly
         public Substraction(int a, int b, ProblemWritter problemWritter) : base(a, b, problemWritter) { }
     }
 
-    // Second statement (-)
+    // Second statement (NIKITA)
     public class Pushka : MathProblem
     {
         protected override String GetOperation()
@@ -164,39 +124,19 @@ namespace Lab3_Poly
         public Pushka(int a, int b, ProblemWritter problemWritter) : base(a, b, problemWritter) { }
     }
 
-    class Program
+    // Third statement (*)
+    public class Multiplication : MathProblem
     {
-        static void Main(String[] args)
+        protected override String GetOperation()
         {
-            // Generating list of problems
-            Random rand = new Random();
-            List<Question> questions = new List<Question>();
-
-            ProblemWritter pw = new ConsoleProblemWritter();
-            for (int i = 0; i < 10; i++)
-            {
-                // Getting random arguments of math problem
-                int a = rand.Next(11);
-                int b = rand.Next(11);
-
-                // Adding a problem to a problem list
-                if (rand.Next(3) == 2) questions.Add(new Summation(a, b, pw));
-                if (rand.Next(3) == 1) questions.Add(new Pushka(a, b, pw));
-                else questions.Add(new Substraction(a, b, pw));
-            }
-
-            // Letting user to solve every problem in a list
-            int k = 1;
-            foreach (var question in questions)
-            {
-                Console.WriteLine();
-                Console.WriteLine("Question #" + k++);
-                question.Ask();
-                question.RequestAnswer();
-                question.GetFeedback();
-            }
-
-            Console.ReadLine();
+            return " * ";
         }
+
+        protected override double ComputeResult(double a, double b)
+        {
+            return a * b;
+        }
+
+        public Multiplication(int a, int b, ProblemWritter problemWritter) : base(a, b, problemWritter) { }
     }
 }
