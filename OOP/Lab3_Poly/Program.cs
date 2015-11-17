@@ -51,7 +51,7 @@ namespace Lab3_Poly
 
         public virtual void RequestAnswer()
         {
-            double AnticipatedAnswer = problemWritter.RecievetUserAnswer(); // Requests abstract implementation
+            double AnticipatedAnswer = problemWritter.RecieveUserAnswer(); // Requests abstract implementation
             double ActualAnswer = ComputeResult(A, B);  // Requests abstract implementation
 
             // Computes if user answer is actually right
@@ -84,30 +84,29 @@ namespace Lab3_Poly
         /*  abstract methods for communication with outer world */
         public abstract void ShowQuestion(String question);
         public abstract void ShowFeedback(String feedback);
-        public abstract double RecievetUserAnswer();
+        public abstract double RecieveUserAnswer();
     }
 
 
     /* Derived class for communication with console */
     public class ConsoleProblemWritter : ProblemWritter
     {
-        protected override void ShowQuestion(string question)
+        public override void ShowQuestion(String question)
         {
             Console.WriteLine(question);
         }
 
-        protected override void ShowFeedback(string feedback)
+        public override void ShowFeedback(String feedback)
         {
             Console.WriteLine(feedback);
         }
 
-        protected override Double GetUserAnswer()
+        public override double RecieveUserAnswer()
         {
             Console.Write("Enter answer: ");
             return Convert.ToDouble(Console.ReadLine());
         }
 
-        public ConsoleProblemWritter();
     }
 
     
@@ -166,7 +165,7 @@ namespace Lab3_Poly
 
     class Program
     {
-        static void Main(String[] args)
+        static void NoMain(String[] args)
         {
             // Generating list of problems
             Random rand = new Random();
@@ -194,6 +193,7 @@ namespace Lab3_Poly
                 question.Ask();
                 question.RequestAnswer();
                 question.GetFeedback();
+
             }
 
             Console.ReadLine();

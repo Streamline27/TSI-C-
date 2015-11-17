@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lab4_Events
 {
+
     public interface Question
     {
         Boolean IsAnswered { get; set; }
@@ -14,11 +15,14 @@ namespace Lab4_Events
         void GetFeedback();
     }
 
+    public delegate void AnswerDelegate(); // способ вызвать!
+
     public abstract class MathProblem : Question
     {
         protected double A { get; set; }
         protected double B { get; set; }
 
+        public event AnswerDelegate OnAnswered;
 
         private ProblemWritter problemWritter; // member for communication with outer world
 
@@ -51,6 +55,7 @@ namespace Lab4_Events
 
             if (AnticipatedAnswer == ActualAnswer) IsAnswered = true;
             else IsAnswered = false;
+            OnAnswered();
         }
 
         public virtual void GetFeedback()

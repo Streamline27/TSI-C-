@@ -115,14 +115,19 @@ namespace Lab3_Struct
         {
             //Creating list
             CircularList list = new CircularList();
-            FillWithRandom(list, 6);
+            FillWithRandom(list, 10);
 
             //Running task functions
             Show(list);
             AddThree(new int[] { 1, 1, 1 }, list);
             Show(list);
-            Console.WriteLine("Search result: " + Search(list, 3));
+
+            Console.WriteLine("Enter key to search: ");
+            int keyToSearch = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("Search result: " + Search(list, keyToSearch));
             Console.WriteLine();
+
 
             SantaBarbara(list, 1, 9);
             Show(list);
