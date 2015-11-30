@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Lab4_Events
 {
-    /* ********************************************************************* */
-    // Abstract class that provides functionality for outer world communication
+    /* ***************************************************************************************** */
+    // Abstract class that provides functionality for outer world communication for ProblemWritter
     public abstract class ProblemWritter
     {
         /*  abstract methods for communication with outer world */

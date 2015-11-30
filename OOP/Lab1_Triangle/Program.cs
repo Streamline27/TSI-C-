@@ -16,7 +16,7 @@ namespace Lab1_Triangle
             triangle.ShowInfo();
             Console.WriteLine(); 
 
-            triangle.ChangeSides(6, 8, 10);
+            triangle.ChangeSides(2, 8, 10);
             triangle.ShowInfo();
 
             Console.ReadLine();

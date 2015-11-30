@@ -17,6 +17,10 @@ namespace Lab4_Events
         private Question Question{ get; set;}
         private ProblemWritter problemWritter;
         private RandomMathProblemFactory problemFactory;
+        private Color defaultColor;
+
+        private int SCORE_CHANGE_WHEN_CORRECT = 6;
+        private int SCORE_CHANGE_WHEN_WRONG = -6;
 
         /******************************/
         public FormQuestion()
@@ -25,7 +29,9 @@ namespace Lab4_Events
 
             problemWritter = new FormProblemWritter(this);
             problemFactory = new RandomMathProblemFactory(problemWritter);
+            defaultColor = this.BackColor;
         }
+
 
         /* Methods for communication  */
 
@@ -41,9 +47,22 @@ namespace Lab4_Events
 
         public double GetAnswer()
         {
+            Double answer;
             String answerText = textBoxAnswer.Text;
-            double answer = Convert.ToDouble(answerText);
-            return answer;
+            if (Double.TryParse(answerText, out answer)) return answer;
+            else return 0;
+        }
+
+        public void SetTimerLabel(String text)
+        {
+            labelScore.Text = text;
+        }
+
+        public void IncreaseScoreLabelValue(int value)
+        {
+            int labelValue = Convert.ToInt32(labelScore.Text);
+            labelValue += value;
+            labelScore.Text = labelValue.ToString();
         }
 
         /* Events */
@@ -58,41 +77,52 @@ namespace Lab4_Events
         private void buttonQuestion_Click(object sender, EventArgs e)
         {
             Question = problemFactory.CreateQuestion();
+            AddEventsToQuestion();
             Question.Ask();
-            MathProblem mp = (MathProblem)Question;
-            mp.OnAnswered += new AnswerDelegate(RunColorChange);
-
-                
         }
 
+        
         private void FormQuestion_Shown(object sender, EventArgs e)
         {
             buttonQuestion_Click(sender, e);
         }
 
-        private void textBoxAnswer_MouseClick(object sender, MouseEventArgs e)
+
+        /* Private helper methods */
+        private void AddEventsToQuestion()
         {
-            this.BackColor = Color.Red;
+            MathProblem mp = (MathProblem)Question;
+            mp.AnsweredCorrectly += OnAnsweredCorrectly;
+            mp.AnsweredWrong += RunColorChange;
+            mp.AnsweredWrong += OnAnsweredWrong;
         }
 
-        private Color c;
+
+        private void OnAnsweredCorrectly()
+        {
+            IncreaseScoreLabelValue(SCORE_CHANGE_WHEN_CORRECT);
+        }
+        private void OnAnsweredWrong()
+        {
+            IncreaseScoreLabelValue(SCORE_CHANGE_WHEN_WRONG);
+        }
+
         // Visual effects
         private void RunColorChange()
         {
-            c = this.BackColor;
+            tick = 0;
             timer1.Enabled = true;
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            tick++;
+            tick+=2;
             BackColor = Color.FromArgb(tick, 0, tick);
             if (tick == 230)
             {
                 timer1.Enabled = false;
                 tick = 0;
-                timer1.Enabled = false;
-                this.BackColor = c;
+                this.BackColor = defaultColor;
             }
         }
 

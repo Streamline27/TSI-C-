@@ -11,24 +11,15 @@ namespace Lab4_Events
         protected const int MAX_NUMBER = 11;
         protected ProblemWritter problemWritter;
         protected Random rand;
-        private List<Type> problemList ;
+        private List<Type> problemList; // List of types that can be randomly selected;
 
         public RandomMathProblemFactory(ProblemWritter problemWritter)
         {
-            //Initializing variables
-            this.problemList = new List<Type>();
-            this.rand = new Random();
             this.problemWritter = problemWritter;
-
-            //Derived from MathProblem classes for draft
-            AddProblemType(typeof(Summation));
-            AddProblemType(typeof(Substraction));
-            AddProblemType(typeof(Pushka));
-            AddProblemType(typeof(Multiplication));
-            AddCustomProblemsTypes();
+            InitializeVariables();
+            AddDefaultProblemTypesToDraft();
+            AddCustomProblemsTypesToDraft();
         }
-
-        protected virtual void AddCustomProblemsTypes() { }
 
         public MathProblem CreateQuestion()
         {
@@ -36,15 +27,32 @@ namespace Lab4_Events
             int secondArg = rand.Next(MAX_NUMBER);
 
             int index = rand.Next(problemList.Count);
+
             Type type = problemList[index];
             return (MathProblem) Activator.CreateInstance(type, firstArg, secondArg, problemWritter);
         }
 
+        protected virtual void AddCustomProblemsTypesToDraft() { }
 
         /* Helper functions */
+        private void InitializeVariables()
+        {
+            this.problemList = new List<Type>();
+            this.rand = new Random();
+        }
+
         protected void AddProblemType(Type type) {
             problemList.Add(type);
         }
+
+        private void AddDefaultProblemTypesToDraft()
+        {
+            AddProblemType(typeof(Summation));
+            AddProblemType(typeof(Substraction));
+            AddProblemType(typeof(Pushka));
+            AddProblemType(typeof(Multiplication));
+        }
+
 
     }
 }

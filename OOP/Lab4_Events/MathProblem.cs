@@ -7,29 +7,36 @@ using System.Threading.Tasks;
 namespace Lab4_Events
 {
 
+    public delegate void AnswerHandler(); // способ вызвать!
+
     public interface Question
     {
-        Boolean IsAnswered { get; set; }
+        Boolean IsAnsweredCorrectly { get; set; }
         void Ask();
         void RequestAnswer();
         void GetFeedback();
-    }
 
-    public delegate void AnswerDelegate(); // способ вызвать!
+        event AnswerHandler Answered;
+        event AnswerHandler AnsweredCorrectly;
+        event AnswerHandler AnsweredWrong;
+
+    }
 
     public abstract class MathProblem : Question
     {
         protected double A { get; set; }
         protected double B { get; set; }
 
-        public event AnswerDelegate OnAnswered;
-
         private ProblemWritter problemWritter; // member for communication with outer world
 
         protected const String FB_POSITIVE = "Answer is right!";
         protected const String FB_NEGATIVE = "Answer is wrong!";
 
-        public Boolean IsAnswered { get; set; }
+        public Boolean IsAnsweredCorrectly { get; set; }
+
+        public event AnswerHandler Answered;
+        public event AnswerHandler AnsweredCorrectly;
+        public event AnswerHandler AnsweredWrong;
 
         /* abstract methods for getting problem features */
         protected abstract String GetOperation();
@@ -44,7 +51,7 @@ namespace Lab4_Events
 
         public virtual void Ask()
         {
-            String question = GetQuestionText();
+            String question = GetQuestionText(A, B, GetOperation());
             problemWritter.ShowQuestion(question); // Requests abstract implementation
         }
 
@@ -53,27 +60,51 @@ namespace Lab4_Events
             double AnticipatedAnswer = problemWritter.RecievetUserAnswer(); // Requests abstract implementation
             double ActualAnswer = ComputeResult(A, B);  // Requests abstract implementation
 
-            if (AnticipatedAnswer == ActualAnswer) IsAnswered = true;
-            else IsAnswered = false;
+            CompareAnswers(AnticipatedAnswer, ActualAnswer);
             OnAnswered();
+            OnAnsweredCorrectly();
+            OnAnsweredWrong();
         }
 
+        
         public virtual void GetFeedback()
         {
             string feedback;
 
-            if (IsAnswered) feedback = FB_POSITIVE;
+            if (IsAnsweredCorrectly) feedback = FB_POSITIVE;
             else feedback = FB_NEGATIVE;
 
             problemWritter.ShowFeedback(feedback); // Requests abstract implementation
         }
 
         // Method for forming question text string
-        protected virtual String GetQuestionText()
+        protected virtual String GetQuestionText(double A, double B, String operation)
         {
-            String operation = GetOperation();
             return A + operation + B + " =?";
         }
+
+        // Private helper methods
+        private void OnAnswered()
+        {
+            if (Answered!=null) Answered();
+        }
+
+        private void OnAnsweredCorrectly()
+        {
+            if (IsAnsweredCorrectly && AnsweredCorrectly!=null) AnsweredCorrectly();
+        }
+
+        private void OnAnsweredWrong()
+        {
+            if (!IsAnsweredCorrectly && AnsweredWrong!=null) AnsweredWrong();
+        }
+
+        private void CompareAnswers(double AnticipatedAnswer, double ActualAnswer)
+        {
+            if (AnticipatedAnswer == ActualAnswer) IsAnsweredCorrectly = true;
+            else IsAnsweredCorrectly = false;
+        }
+
     }
    
 
@@ -118,7 +149,12 @@ namespace Lab4_Events
     {
         protected override String GetOperation()
         {
-            return " NIKITA ";
+            return "";
+        }
+
+        protected override string GetQuestionText(double A, double B, String operation)
+        {
+            return A + " * " + B + " + " + A + " * " + B + " =?"; 
         }
 
         protected override double ComputeResult(double a, double b)
