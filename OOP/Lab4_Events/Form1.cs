@@ -13,11 +13,11 @@ namespace Lab4_Events
     public partial class FormQuestion : Form
     {
 
-        private int tick = 0;
-        private Question Question{ get; set;}
-        private ProblemWritter problemWritter;
-        private RandomMathProblemFactory problemFactory;
-        private Color defaultColor;
+        private int tick{get; set;}
+        private Question question{ get; set;}
+        private ProblemWritter problemWritter {get; set;}
+        private RandomMathProblemFactory problemFactory { get; set; }
+        private Color defaultColor { get; set; }
 
         private int SCORE_CHANGE_WHEN_CORRECT = 6;
         private int SCORE_CHANGE_WHEN_WRONG = -6;
@@ -69,16 +69,16 @@ namespace Lab4_Events
 
         private void buttonAnswer_Click(object sender, EventArgs e)
         {
-            Question.RequestAnswer();
-            Question.GetFeedback();
+            question.RequestAnswer();
+            question.GetFeedback();
         }
 
 
         private void buttonQuestion_Click(object sender, EventArgs e)
         {
-            Question = problemFactory.CreateQuestion();
+            question = problemFactory.CreateQuestion();
             AddEventsToQuestion();
-            Question.Ask();
+            question.Ask();
         }
 
         
@@ -91,17 +91,17 @@ namespace Lab4_Events
         /* Private helper methods */
         private void AddEventsToQuestion()
         {
-            MathProblem mp = (MathProblem)Question;
+            MathProblem mp = (MathProblem)question;
             mp.AnsweredCorrectly += OnAnsweredCorrectly;
             mp.AnsweredWrong += RunColorChange;
             mp.AnsweredWrong += OnAnsweredWrong;
         }
 
-
         private void OnAnsweredCorrectly()
         {
             IncreaseScoreLabelValue(SCORE_CHANGE_WHEN_CORRECT);
         }
+
         private void OnAnsweredWrong()
         {
             IncreaseScoreLabelValue(SCORE_CHANGE_WHEN_WRONG);
