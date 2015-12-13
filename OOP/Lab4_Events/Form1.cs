@@ -93,6 +93,7 @@ namespace Lab4_Events
         {
             MathProblem mp = (MathProblem)question;
             mp.AnsweredCorrectly += OnAnsweredCorrectly;
+            mp.AnsweredCorrectly += RunColorChange;
             mp.AnsweredWrong += RunColorChange;
             mp.AnsweredWrong += OnAnsweredWrong;
         }

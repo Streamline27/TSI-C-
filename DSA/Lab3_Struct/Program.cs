@@ -57,6 +57,7 @@ namespace Lab3_Struct
             for (int i = 0; i < shift; i++) nodeBeforeCurrent = nodeBeforeCurrent.Next;
             nodeBeforeCurrent.Next = nodeBeforeCurrent.Next.Next;
         }
+
     }
 
 
