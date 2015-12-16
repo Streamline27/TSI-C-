@@ -17,15 +17,14 @@ namespace Lab5_DataBind.form
         private string USERNAME = "root";
         private string PASSWORD = "root";
 
-        private PersonDAO personDAO;
-        private IList<Person> people;
+        private PersonDAO PersonDAO { get; set; }
+        private IList<Person> People { get; set; }
 
         public DbForm(IList<Person> people)
         {
             InitializeComponent();
             PutConnectionParamsIntoTextboxes();
-            this.people = people;
-            tbxPass.PasswordChar = '*';
+            People = people;
         }
 
 
@@ -33,14 +32,15 @@ namespace Lab5_DataBind.form
         /*      Events      */
         private void buttonConnect_Click(object sender, EventArgs e)
         {
-            RetrieveConnectionParams();
-            personDAO = new PersonDAO(SOURCE_URL, INITIAL_CATALOG, USERNAME, PASSWORD);
+            RecieveConnectionParamsFromForm();
+            PersonDAO = new PersonDAO(SOURCE_URL, INITIAL_CATALOG, USERNAME, PASSWORD);
 
-            if (personDAO.IsConnected)
+            if (PersonDAO.IsConnected)
             {
                 RefreshDataSource();
                 EnableButtons();
             }
+            else DisableButtons();
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
@@ -50,12 +50,12 @@ namespace Lab5_DataBind.form
 
         private void btnFlush_Click(object sender, EventArgs e)
         {
-            foreach (var person in people)
+            foreach (var person in People)
             {
-                personDAO.addPerson(person);
+                PersonDAO.Insert(person);
             }
+            People.Clear();
             RefreshDataSource();
-            people.Clear();
         }
 
         /**************************/
@@ -66,10 +66,16 @@ namespace Lab5_DataBind.form
             btnRefresh.Enabled = true;
         }
 
+        private void DisableButtons()
+        {
+            btnFlush.Enabled = false;
+            btnRefresh.Enabled = false;
+        }
+
 
         private void RefreshDataSource()
         {
-            personDAO.selectPeople(dbGridView);
+            dbGridView.DataSource = PersonDAO.Select();
         }
 
 
@@ -81,7 +87,7 @@ namespace Lab5_DataBind.form
             tbxPass.Text = PASSWORD;
         }
 
-        private void RetrieveConnectionParams()
+        private void RecieveConnectionParamsFromForm()
         {
             this.SOURCE_URL = tbxServer.Text;
             this.INITIAL_CATALOG = tbxSchema.Text;

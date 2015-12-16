@@ -13,7 +13,7 @@ namespace Lab5_DataBind
 {
     class PersonDAO
     {
-        private delegate void commandDelegate(MySqlConnection con);
+        private delegate void SqlCommandHandler(MySqlConnection con);
 
         private string SourceUrl { get; set; }
         private string InitialCatalog { get; set; }
@@ -35,78 +35,88 @@ namespace Lab5_DataBind
             ExecuteInTransaction((connection) => { });
         }
 
-        public void selectPeople(DataGridView gridView)
+        /*******************************/
+        /*  Public interface methods   */
+
+        public DataTable Select()
         {        
+            DataTable dataTable = new DataTable();
+
             // Lambda expression
-            ExecuteInTransaction((connection)=>{
-                // Execute sql query
+            ExecuteInTransaction((connection)=>
+            {
                 MySqlCommand command = new MySqlCommand(SELECT_QUERY, connection);
                 MySqlDataReader sqlDataReader = command.ExecuteReader();
-
-                // Fill gridView with data
-                DataTable dataTable = new DataTable();
                 dataTable.Load(sqlDataReader);
-                gridView.DataSource = dataTable; 
             });
+            return dataTable; 
         }
 
-        public void addPerson(Person person)
+        public void Insert(Person person)
         {
-            string insert_query = INSERT_FIRTS_PART+ getSecondInsertPart(person);
+            string insert_query = getInsertQuery(person);
+
             // Lambda expression
             ExecuteInTransaction((connection) =>
             {
-                // Execute sql query
                 MySqlCommand command = new MySqlCommand(insert_query, connection);
                 MySqlDataReader sqlDataReader = command.ExecuteReader();
-
             });
         }
 
 
         /****************************/
         /* Private helper functions */
-        private void ExecuteInTransaction(commandDelegate command)
+        
+        private string getConnectionString()
+        {
+            string cs = "";
+            cs += "server=" + SourceUrl + ";";
+            cs += "database=" + InitialCatalog + ";";
+            cs += "uid=" + Username + ";";
+            cs += "pwd=" + Password + ";";
+            return cs;
+        }
+
+        
+        private string getInsertQuery(Person person)
+        {
+            string first = person.FirstName;
+            string last = person.LastName;
+            int age = person.Age;
+
+            return INSERT_FIRTS_PART + ConstructSecondQueryPart(first, last, age);
+        }
+
+        private string ConstructSecondQueryPart(string first, string last, int age)
+        {
+            //      values("Roman", "Komjakov", 22);
+            return "values(\"" + first + "\", \"" + last + "\", " + age + ");";
+        }
+
+        
+        private void ExecuteInTransaction(SqlCommandHandler inTransactionExecutable)
         {
             MySqlConnection dbConnection = null;
             try
             {
-                // Opening database connection
                 dbConnection = new MySqlConnection(getConnectionString());
                 dbConnection.Open();
 
-                // Executing massed command
-                command(dbConnection);
+                inTransactionExecutable.Invoke(dbConnection);
                 IsConnected = true;
             }
             catch
             {
-                MessageBox.Show("Error connection to database");
+                MessageBox.Show("Error connecting to database");
+                IsConnected = false;
             }
-
             finally
             {
                 dbConnection.Close();
             }
         }
 
-        private string getSecondInsertPart(Person person)
-        {
-            string first = person.FirstName;
-            string last = person.LastName;
-            int age = person.Age;
-
-            //      values("Roman", "Komjakov", 22);
-            return "values(\"" + first + "\", \"" + last + "\", " + age + ");" ;
-        }
-
-        private string getConnectionString(){
-            string cs = "";
-            cs += "server=" +SourceUrl + ";";
-            cs += "database=" + InitialCatalog + ";";
-            cs += "uid="+Username+";";
-            cs += "pwd="+Password+";";
-            return cs;
-        }
+        
     }
 }

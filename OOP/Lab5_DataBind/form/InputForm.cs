@@ -16,18 +16,16 @@ namespace Lab5_DataBind
         private IList<Person> personList;
         private DbForm dbForm;
 
-
         public InputForm()
         {
             InitializeComponent();
-
             personList = new BindingList<Person>();
             AttachDataSource();
-
         }
 
 
-        // Events
+        /********************/
+        /*      Events      */
         private void buttonAdd_Click(object sender, EventArgs e)
         {
             try
@@ -41,14 +39,19 @@ namespace Lab5_DataBind
             }
         }
 
-
         private void buttonClear_Click(object sender, EventArgs e)
         {
             personList.Clear();
         }
 
+        private void buttonDb_Click(object sender, EventArgs e)
+        {
+            dbForm = new DbForm(personList);
+            dbForm.Show();
+        }
 
-        // Private helper functions
+        /****************************/
+        /* Private helper functions */
         private void AttachDataSource()
         {
             var source = new BindingSource(personList, null);
@@ -58,26 +61,19 @@ namespace Lab5_DataBind
 
         private Person getPersonFromForm()
         {
-            String firstName = tbFirstName.Text;
-            String lastName = tbLastName.Text;
-            int age = getAge();
-
-            Person person = new Person(firstName, lastName, age);
-            return person;
+            return new Person(tbFirstName.Text, tbLastName.Text, InputedAge);
         }
 
-        private int getAge()
+        private int InputedAge
         {
+            get
+            {
                 int age;
-                if (!Int32.TryParse(tbAge.Text, out age)) throw new System.ArgumentException {};
+                if (!Int32.TryParse(tbAge.Text, out age)) throw new System.ArgumentException { };
                 return age;          
+            }
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-            dbForm = new DbForm(personList);
-            dbForm.Show();
-        }
 
     }
 }
