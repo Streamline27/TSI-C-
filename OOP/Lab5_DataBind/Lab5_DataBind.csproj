@@ -48,26 +48,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="form\DbForm.cs">
+    <Compile Include="BindingList.cs" />
+    <Compile Include="forms\DbForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="form\DbForm.Designer.cs">
+    <Compile Include="forms\DbForm.Designer.cs">
       <DependentUpon>DbForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="form\InputForm.cs">
+    <Compile Include="forms\InputForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="form\InputForm.Designer.cs">
+    <Compile Include="forms\InputForm.Designer.cs">
       <DependentUpon>InputForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Person.cs" />
     <Compile Include="PersonDAO.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="form\DbForm.resx">
+    <EmbeddedResource Include="forms\DbForm.resx">
       <DependentUpon>DbForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="form\InputForm.resx">
+    <EmbeddedResource Include="forms\InputForm.resx">
       <DependentUpon>InputForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

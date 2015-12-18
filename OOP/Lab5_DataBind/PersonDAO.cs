@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Data.Odbc;
 using System.Data.SqlClient;
@@ -11,7 +12,14 @@ using System.Windows.Forms;
 
 namespace Lab5_DataBind
 {
-    class PersonDAO
+    public interface PersonDAO
+    {
+        IList<Person> Select();
+        void Insert(Person person);
+        bool IsConnected { get; }
+    }
+
+    public class PersonDAOImpl : PersonDAO
     {
         private delegate void SqlCommandHandler(MySqlConnection con);
 
@@ -25,7 +33,7 @@ namespace Lab5_DataBind
 
         public bool IsConnected { get; private set; }
 
-        public PersonDAO(string sourceUrl, String initialCatalog, String username, String password){
+        public PersonDAOImpl(string sourceUrl, String initialCatalog, String username, String password){
             this.SourceUrl = sourceUrl;
             this.InitialCatalog = initialCatalog;
             this.Username = username;
@@ -38,18 +46,18 @@ namespace Lab5_DataBind
         /*******************************/
         /*  Public interface methods   */
 
-        public DataTable Select()
+        public IList<Person> Select()
         {        
-            DataTable dataTable = new DataTable();
+            IList<Person> people = null;
 
             // Lambda expression
             ExecuteInTransaction((connection)=>
             {
                 MySqlCommand command = new MySqlCommand(SELECT_QUERY, connection);
                 MySqlDataReader sqlDataReader = command.ExecuteReader();
-                dataTable.Load(sqlDataReader);
+                people = getPersonListFromSqlReader(sqlDataReader);
             });
-            return dataTable; 
+            return people;
         }
 
         public void Insert(Person person)
@@ -94,6 +102,23 @@ namespace Lab5_DataBind
             return "values(\"" + first + "\", \"" + last + "\", " + age + ");";
         }
 
+
+        private IList<Person> getPersonListFromSqlReader(MySqlDataReader reader)
+        {
+            IList<Person> people = new BindingList<Person>();
+            while (reader.Read())
+            {
+                String first = reader["first_name"].ToString();
+                String last = reader["last_name"].ToString();
+                int age = Convert.ToInt32(reader["age"].ToString());
+
+                Person p = new Person(first, last, age);
+                people.Add(p);
+            }
+            return people;
+        }
+
+
         
         private void ExecuteInTransaction(SqlCommandHandler inTransactionExecutable)
         {
@@ -106,7 +131,7 @@ namespace Lab5_DataBind
                 inTransactionExecutable.Invoke(dbConnection);
                 IsConnected = true;
             }
-            catch
+            catch(Exception)
             {
                 MessageBox.Show("Error connecting to database");
                 IsConnected = false;

@@ -33,7 +33,7 @@ namespace Lab5_DataBind.form
         private void buttonConnect_Click(object sender, EventArgs e)
         {
             RecieveConnectionParamsFromForm();
-            PersonDAO = new PersonDAO(SOURCE_URL, INITIAL_CATALOG, USERNAME, PASSWORD);
+            PersonDAO = new PersonDAOImpl(SOURCE_URL, INITIAL_CATALOG, USERNAME, PASSWORD);
 
             if (PersonDAO.IsConnected)
             {
