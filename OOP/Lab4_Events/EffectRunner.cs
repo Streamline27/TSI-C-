@@ -40,6 +40,11 @@ namespace Lab4_Events
             RunColorEffect(Color.Red);
         }
 
+        public void RunBlackEffect()
+        {
+            RunColorEffect(Color.Black);
+        }
+
         private void RunColorEffect(Color color)
         {
             Form.BackColor = color;

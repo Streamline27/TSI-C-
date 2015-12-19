@@ -105,24 +105,35 @@ namespace Lab4_Events
         /* Game event subscribers */
         private void AddEventsToGame()
         {
-            Game.ScoreChanged += RefreshScoreLabel; // Binding Score property to form controll through event
-            Game.Tick += RefreshTimeLabel; // One subscriber to two different events
-            Game.AnsweredCorrectly += RefreshTimeLabel; // One subscriber to two different events
+            // Binding Score and Time properties to labels
+            // When properties are changed labels are immidiatelly refreshed
+            Game.ScoreChanged += RefreshScoreLabel; 
+            Game.RemainingTimeChanged += RefreshTimeLabel;
 
             // Example of running outer object methods as a subscriber
             Game.AnsweredCorrectly += effectRunner.RunGreenEffect;
             Game.AnsweredWrong += effectRunner.RunRedEffect;
 
+            // One subscriber for two different events
+            Game.GameEnded += effectRunner.RunBlackEffect;
+            Game.GameStarted += effectRunner.RunBlackEffect;
+
             // Many subscribers to one event
             Game.GameEnded += DisableGameButtons;
             Game.GameEnded += EnableNewButton;
             Game.GameEnded += SetGameOverStatus;
-            Game.GameEnded += GetOverallFeedback;
+            Game.GameEnded += GetEndGameFeedback;
 
-            Game.GameStarted += RefreshTimeLabel;
             Game.GameStarted += EnableGameButtons;
             Game.GameStarted += DisableNewButton;
             Game.GameStarted += SetMotoFeedback;
+
+            // Example of using labda expression to assign subscriber
+            Game.Tick += () =>
+            {
+                if (Game.RemainingTime < 8) labelTime.ForeColor = Color.Red;
+                if (Game.RemainingTime == 0) labelTime.ForeColor = Color.Black;
+            };
         }
 
         private void SetGameOverStatus()
@@ -167,7 +178,7 @@ namespace Lab4_Events
             SetFeedbackLabel(STARTING_MOTO_FEEDBACK);
         }
 
-        private void GetOverallFeedback()
+        private void GetEndGameFeedback()
         {
             if (Game.Score < BAD_RESULT_TRESHOLD) SetFeedbackLabel(BAD_RESULT_FEEDBACK);
             else if (Game.Score < SEMI_RESULT_TRESHOLD) SetFeedbackLabel(SEMI_RESULT_FEEDBACK);
