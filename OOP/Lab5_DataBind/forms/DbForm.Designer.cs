@@ -35,19 +35,25 @@
             this.lbAdress = new System.Windows.Forms.Label();
             this.lbUser = new System.Windows.Forms.Label();
             this.lbPass = new System.Windows.Forms.Label();
-            this.btnRefresh = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.btnFlush = new System.Windows.Forms.Button();
+            this.btnSelect = new System.Windows.Forms.Button();
+            this.btnConnect = new System.Windows.Forms.Button();
+            this.btnAddAll = new System.Windows.Forms.Button();
             this.tbxSchema = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnDelete = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dbGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // dbGridView
             // 
+            this.dbGridView.AllowUserToAddRows = false;
+            this.dbGridView.AllowUserToDeleteRows = false;
             this.dbGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dbGridView.Location = new System.Drawing.Point(12, 106);
+            this.dbGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke;
+            this.dbGridView.Location = new System.Drawing.Point(12, 125);
             this.dbGridView.Name = "dbGridView";
+            this.dbGridView.ReadOnly = true;
+            this.dbGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dbGridView.Size = new System.Drawing.Size(337, 150);
             this.dbGridView.TabIndex = 1;
             // 
@@ -100,37 +106,37 @@
             this.lbPass.TabIndex = 7;
             this.lbPass.Text = "Password";
             // 
-            // btnRefresh
+            // btnSelect
             // 
-            this.btnRefresh.Enabled = false;
-            this.btnRefresh.Location = new System.Drawing.Point(276, 67);
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(75, 23);
-            this.btnRefresh.TabIndex = 8;
-            this.btnRefresh.Text = "Refresh";
-            this.btnRefresh.UseVisualStyleBackColor = true;
-            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            this.btnSelect.Enabled = false;
+            this.btnSelect.Location = new System.Drawing.Point(210, 66);
+            this.btnSelect.Name = "btnSelect";
+            this.btnSelect.Size = new System.Drawing.Size(103, 23);
+            this.btnSelect.TabIndex = 8;
+            this.btnSelect.Text = "Select";
+            this.btnSelect.UseVisualStyleBackColor = true;
+            this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
             // 
-            // button1
+            // btnConnect
             // 
-            this.button1.Location = new System.Drawing.Point(111, 66);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 9;
-            this.button1.Text = "Connect";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.buttonConnect_Click);
+            this.btnConnect.Location = new System.Drawing.Point(111, 66);
+            this.btnConnect.Name = "btnConnect";
+            this.btnConnect.Size = new System.Drawing.Size(93, 23);
+            this.btnConnect.TabIndex = 9;
+            this.btnConnect.Text = "Connect";
+            this.btnConnect.UseVisualStyleBackColor = true;
+            this.btnConnect.Click += new System.EventHandler(this.buttonConnect_Click);
             // 
-            // btnFlush
+            // btnAddAll
             // 
-            this.btnFlush.Enabled = false;
-            this.btnFlush.Location = new System.Drawing.Point(192, 67);
-            this.btnFlush.Name = "btnFlush";
-            this.btnFlush.Size = new System.Drawing.Size(75, 23);
-            this.btnFlush.TabIndex = 10;
-            this.btnFlush.Text = "Flush";
-            this.btnFlush.UseVisualStyleBackColor = true;
-            this.btnFlush.Click += new System.EventHandler(this.btnFlush_Click);
+            this.btnAddAll.Enabled = false;
+            this.btnAddAll.Location = new System.Drawing.Point(192, 96);
+            this.btnAddAll.Name = "btnAddAll";
+            this.btnAddAll.Size = new System.Drawing.Size(121, 23);
+            this.btnAddAll.TabIndex = 10;
+            this.btnAddAll.Text = "Move From Input";
+            this.btnAddAll.UseVisualStyleBackColor = true;
+            this.btnAddAll.Click += new System.EventHandler(this.btnAddAll_Click);
             // 
             // tbxSchema
             // 
@@ -148,16 +154,28 @@
             this.label1.TabIndex = 12;
             this.label1.Text = "Schema";
             // 
+            // btnDelete
+            // 
+            this.btnDelete.Enabled = false;
+            this.btnDelete.Location = new System.Drawing.Point(111, 96);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(75, 23);
+            this.btnDelete.TabIndex = 13;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
             // DbForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(363, 274);
+            this.ClientSize = new System.Drawing.Size(363, 289);
+            this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.tbxSchema);
-            this.Controls.Add(this.btnFlush);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.btnRefresh);
+            this.Controls.Add(this.btnAddAll);
+            this.Controls.Add(this.btnConnect);
+            this.Controls.Add(this.btnSelect);
             this.Controls.Add(this.lbPass);
             this.Controls.Add(this.lbUser);
             this.Controls.Add(this.lbAdress);
@@ -183,11 +201,12 @@
         private System.Windows.Forms.Label lbAdress;
         private System.Windows.Forms.Label lbUser;
         private System.Windows.Forms.Label lbPass;
-        private System.Windows.Forms.Button btnRefresh;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button btnFlush;
+        private System.Windows.Forms.Button btnSelect;
+        private System.Windows.Forms.Button btnConnect;
+        private System.Windows.Forms.Button btnAddAll;
         private System.Windows.Forms.TextBox tbxSchema;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnDelete;
 
     }
 }

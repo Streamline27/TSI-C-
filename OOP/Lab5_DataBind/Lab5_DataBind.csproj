@@ -36,6 +36,10 @@
       <HintPath>..\packages\MySql.Data.6.9.8\lib\net45\MySql.Data.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -49,6 +53,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BindingList.cs" />
+    <Compile Include="dao\JsonPersonDAO.cs" />
+    <Compile Include="dao\PersonDAO.cs" />
     <Compile Include="forms\DbForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -61,8 +67,14 @@
     <Compile Include="forms\InputForm.Designer.cs">
       <DependentUpon>InputForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="forms\JsonForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\JsonForm.Designer.cs">
+      <DependentUpon>JsonForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Person.cs" />
-    <Compile Include="PersonDAO.cs" />
+    <Compile Include="dao\SqlPersonDAO.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="forms\DbForm.resx">
@@ -70,6 +82,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="forms\InputForm.resx">
       <DependentUpon>InputForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms\JsonForm.resx">
+      <DependentUpon>JsonForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -17,5 +17,16 @@ namespace Lab5_DataBind
             LastName = lastName;
             Age = age;
         }
+
+        
+        public override bool Equals(object obj)
+        {
+            if (obj.GetType()!= this.GetType()) return false;
+            var o = (Person)obj;
+            if (o.FirstName != this.FirstName) return false;
+            if (o.LastName != this.LastName) return false;
+            if (o.Age != this.Age) return false;
+            return true;
+        }
     }
 }

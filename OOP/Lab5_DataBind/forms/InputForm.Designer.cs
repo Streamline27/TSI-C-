@@ -35,40 +35,46 @@
             this.labelFirstName = new System.Windows.Forms.Label();
             this.labelSecondName = new System.Windows.Forms.Label();
             this.labelAge = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btnAdd = new System.Windows.Forms.Button();
+            this.btnClear = new System.Windows.Forms.Button();
+            this.btnDataBase = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.radioJson = new System.Windows.Forms.RadioButton();
+            this.radioMySql = new System.Windows.Forms.RadioButton();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView
             // 
+            this.dataGridView.AllowUserToAddRows = false;
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView.Location = new System.Drawing.Point(12, 99);
+            this.dataGridView.Location = new System.Drawing.Point(12, 110);
             this.dataGridView.Name = "dataGridView";
+            this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView.Size = new System.Drawing.Size(337, 150);
-            this.dataGridView.TabIndex = 0;
+            this.dataGridView.TabIndex = 15;
             // 
             // tbFirstName
             // 
             this.tbFirstName.Location = new System.Drawing.Point(12, 33);
             this.tbFirstName.Name = "tbFirstName";
             this.tbFirstName.Size = new System.Drawing.Size(100, 20);
-            this.tbFirstName.TabIndex = 1;
+            this.tbFirstName.TabIndex = 0;
             // 
             // tbLastName
             // 
             this.tbLastName.Location = new System.Drawing.Point(118, 33);
             this.tbLastName.Name = "tbLastName";
-            this.tbLastName.Size = new System.Drawing.Size(100, 20);
-            this.tbLastName.TabIndex = 2;
+            this.tbLastName.Size = new System.Drawing.Size(118, 20);
+            this.tbLastName.TabIndex = 1;
             // 
             // tbAge
             // 
-            this.tbAge.Location = new System.Drawing.Point(225, 32);
+            this.tbAge.Location = new System.Drawing.Point(242, 33);
             this.tbAge.Name = "tbAge";
             this.tbAge.Size = new System.Drawing.Size(100, 20);
-            this.tbAge.TabIndex = 3;
+            this.tbAge.TabIndex = 2;
             // 
             // labelFirstName
             // 
@@ -91,50 +97,97 @@
             // labelAge
             // 
             this.labelAge.AutoSize = true;
-            this.labelAge.Location = new System.Drawing.Point(225, 13);
+            this.labelAge.Location = new System.Drawing.Point(239, 12);
             this.labelAge.Name = "labelAge";
             this.labelAge.Size = new System.Drawing.Size(26, 13);
             this.labelAge.TabIndex = 6;
             this.labelAge.Text = "Age";
             // 
-            // button1
+            // btnAdd
             // 
-            this.button1.Location = new System.Drawing.Point(15, 60);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(97, 23);
-            this.button1.TabIndex = 7;
-            this.button1.Text = "Add";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.buttonAdd_Click);
+            this.btnAdd.Location = new System.Drawing.Point(15, 60);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(75, 23);
+            this.btnAdd.TabIndex = 4;
+            this.btnAdd.Text = "Add";
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.buttonAdd_Click);
             // 
-            // button2
+            // btnClear
             // 
-            this.button2.Location = new System.Drawing.Point(121, 59);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 8;
-            this.button2.Text = "Clear";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.buttonClear_Click);
+            this.btnClear.Location = new System.Drawing.Point(186, 58);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(75, 23);
+            this.btnClear.TabIndex = 8;
+            this.btnClear.Text = "Clear All";
+            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.buttonClear_Click);
             // 
-            // button3
+            // btnDataBase
             // 
-            this.button3.Location = new System.Drawing.Point(250, 58);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 9;
-            this.button3.Text = "Database";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.buttonDb_Click);
+            this.btnDataBase.Location = new System.Drawing.Point(267, 58);
+            this.btnDataBase.Name = "btnDataBase";
+            this.btnDataBase.Size = new System.Drawing.Size(75, 23);
+            this.btnDataBase.TabIndex = 9;
+            this.btnDataBase.Text = "Database";
+            this.btnDataBase.UseVisualStyleBackColor = true;
+            this.btnDataBase.Click += new System.EventHandler(this.buttonDb_Click);
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.Location = new System.Drawing.Point(96, 58);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(84, 23);
+            this.btnDelete.TabIndex = 11;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.buttonDelete_Click);
+            // 
+            // radioJson
+            // 
+            this.radioJson.AutoSize = true;
+            this.radioJson.Checked = true;
+            this.radioJson.Location = new System.Drawing.Point(267, 87);
+            this.radioJson.Name = "radioJson";
+            this.radioJson.Size = new System.Drawing.Size(72, 17);
+            this.radioJson.TabIndex = 16;
+            this.radioJson.TabStop = true;
+            this.radioJson.Text = "JSON File";
+            this.radioJson.UseVisualStyleBackColor = true;
+            // 
+            // radioMySql
+            // 
+            this.radioMySql.AutoSize = true;
+            this.radioMySql.Location = new System.Drawing.Point(175, 87);
+            this.radioMySql.Name = "radioMySql";
+            this.radioMySql.Size = new System.Drawing.Size(86, 17);
+            this.radioMySql.TabIndex = 17;
+            this.radioMySql.Text = "MySql server";
+            this.radioMySql.UseVisualStyleBackColor = true;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(15, 90);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(140, 17);
+            this.checkBox1.TabIndex = 18;
+            this.checkBox1.Text = "Allow adding dublicates.";
+            this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // InputForm
             // 
+            this.AcceptButton = this.btnAdd;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(371, 261);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(371, 271);
+            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.radioMySql);
+            this.Controls.Add(this.radioJson);
+            this.Controls.Add(this.btnDelete);
+            this.Controls.Add(this.btnDataBase);
+            this.Controls.Add(this.btnClear);
+            this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.labelAge);
             this.Controls.Add(this.labelSecondName);
             this.Controls.Add(this.labelFirstName);
@@ -159,9 +212,13 @@
         private System.Windows.Forms.Label labelFirstName;
         private System.Windows.Forms.Label labelSecondName;
         private System.Windows.Forms.Label labelAge;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.Button btnClear;
+        private System.Windows.Forms.Button btnDataBase;
+        private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.RadioButton radioJson;
+        private System.Windows.Forms.RadioButton radioMySql;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }
 

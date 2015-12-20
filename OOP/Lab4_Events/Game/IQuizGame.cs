@@ -13,9 +13,12 @@ namespace Lab4_Events.Game
         void NextQuestion();
         void SubmitAnswer();
 
-        event AnswerHandler Answered;
-        event AnswerHandler AnsweredCorrectly;
-        event AnswerHandler AnsweredWrong;
+        public event AnswerHandler Answered;
+        public event AnswerHandler AnsweredCorrectly;
+        public event AnswerHandler AnsweredWrong;
+        public event AnswerHandler QuestionAsked;
+        public event GameConditionHandler GameEnded;
+        public event GameConditionHandler GameStarted;
 
     }
 }
