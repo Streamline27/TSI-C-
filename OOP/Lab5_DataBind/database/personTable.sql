@@ -2,6 +2,8 @@ DROP SCHEMA `cs_test`;
 CREATE SCHEMA IF NOT EXISTS `cs_test` DEFAULT CHARACTER SET utf8 ;
 USE `cs_test` ;
 
+SET SQL_SAFE_UPDATES = 0;
+
  create TABLE `People` (
             `person_id` bigint(20) NOT NULL AUTO_INCREMENT,
             `first_name` varchar(50) NOT NULL,
@@ -14,3 +16,7 @@ USE `cs_test` ;
 INSERT INTO People (first_name, last_name, age) values("Roman", "Komjakov", 22);
 INSERT INTO People (first_name, last_name, age) values("Aleksandr", "Lisicin", 21);
 INSERT INTO People (first_name, last_name, age) values("Vladimir", "Grigoriev", 22);
+
+SELECT * FROM cs_test.people;
+
+DELETE FROM People WHERE first_name='Roman' AND last_name='Komjakov' AND age=22; 
